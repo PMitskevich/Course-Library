@@ -15,6 +15,7 @@
         Фамилия: <input style="margin-bottom: 5px;" type="text" name="surname" value="" /><br />
         Имя: <input style="margin-bottom: 5px;" type="text" name="name" value="" /><br />
         Отчество: <input style="margin-bottom: 5px;" type="text" name="patronymic" value="" /><br />
+        Телефон: <input style="margin-bottom: 5px;" type="text" name="phone" value="" /><br />
         День рождения: <input style="margin-bottom: 5px;" type="date" name="birthday" /><br />
         Логин: <input style="margin-bottom: 5px;" type="text" name="login" value="" /><br />
         Пароль: <input style="margin-bottom: 5px;" type="password" name="password" value="" /><br />

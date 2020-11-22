@@ -15,6 +15,7 @@ public class Visitor {
     private String name;
     private String patronymic;
     private String fullName;
+    private String phone;
     private LocalDate birthday;
 
     public long getVisitorId() { return visitorId; }
@@ -41,11 +42,15 @@ public class Visitor {
 
     public void setFullName(String fullName) { this.fullName = fullName; }
 
+    public String getPhone() { return phone; }
+
+    public void setPhone(String phone) { this.phone = phone; }
+
     public LocalDate getBirthday() { return birthday; }
 
     public void setBirthday(LocalDate birthday) { this.birthday = birthday; }
 
-    public void setVisitor(HttpServletRequest req) throws IOException {
+    public void setVisitor(HttpServletRequest req) {
         this.setVisitorId(new VisitorDao().getAll().size() + 1);
         this.setSurname(req.getParameter("surname"));
         this.setName(req.getParameter("name"));
@@ -53,6 +58,7 @@ public class Visitor {
         this.setFullName(this.getName().charAt(0) + "."
                 + this.getPatronymic().charAt(0) + "."
                 + this.getSurname());
+        this.setPhone(req.getParameter("phone"));
         this.setBirthday(LocalDate.parse(req.getParameter("birthday")));
         this.setUserId(new UserDao().getAll().size() + 1);
     }

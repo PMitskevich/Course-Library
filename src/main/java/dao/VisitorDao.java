@@ -22,6 +22,7 @@ public class VisitorDao implements DaoInterface<Visitor> {
         visitor.setName(resultSet.getString("name"));
         visitor.setSurname(resultSet.getString("surname"));
         visitor.setPatronymic(resultSet.getString("patronymic"));
+        visitor.setPhone(resultSet.getString("phone"));
         visitor.setBirthday(LocalDate.parse(resultSet.getString("birthday")));
         visitor.setFullName(visitor.getName().charAt(0) + "."
                 + visitor.getPatronymic().charAt(0) + "."
@@ -97,6 +98,7 @@ public class VisitorDao implements DaoInterface<Visitor> {
                     + visitor.getSurname() + "', '"
                     + visitor.getName() + "', '"
                     + visitor.getPatronymic() + "', '"
+                    + visitor.getPhone() + "', '"
                     + visitor.getBirthday() + "', '"
                     + visitor.getUserId() + "');");
         }
@@ -124,6 +126,7 @@ public class VisitorDao implements DaoInterface<Visitor> {
                     + "`library_demo`.visitor.surname='" + visitor.getSurname() + "', "
                     + "`library_demo`.visitor.name='" + visitor.getName() + "', "
                     + "`library_demo`.visitor.patronymic='" + visitor.getPatronymic() + "', "
+                    + "`library_demo`.visitor.phone='" + visitor.getPhone() + "', "
                     + "`library_demo`.visitor.birthday='" + visitor.getBirthday() + "', "
                     + "`library_demo`.visitor.User_id_user='" + visitor.getUserId() + "'"
                     + "WHERE `library_demo`.visitor.id_visitor=" + visitor.getVisitorId());

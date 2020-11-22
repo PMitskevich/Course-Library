@@ -15,6 +15,12 @@
     <form name="order" action="${pageContext.request.contextPath}/showorders" method="get">
         <input type="submit" value="Посмотреть заказы" />
     </form>
+    <form name="order" action="${pageContext.request.contextPath}/" method="get">
+        <input type="submit" value="Заказать новую книгу" />
+    </form>
+    <form name="order" action="${pageContext.request.contextPath}/showorders" method="get">
+        <input type="submit" value="" />
+    </form>
     <a href="${pageContext.request.contextPath}/index.jsp">Вернуться к авторизации</a>
 </body>
 </html>
