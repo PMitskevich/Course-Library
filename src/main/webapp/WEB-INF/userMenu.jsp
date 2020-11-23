@@ -11,7 +11,7 @@
     <title>Пользовательское меню</title>
     <style>
         a {
-            text-decoration: black;
+            text-decoration: #000000;
             cursor: pointer;
         }
     </style>

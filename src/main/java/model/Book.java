@@ -1,5 +1,7 @@
 package model;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Book {
     private long bookId;
     private long authorId;
@@ -31,4 +33,12 @@ public class Book {
     public int getQuantity() { return quantity; }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public void setBook(HttpServletRequest req, Author author, Publishing publishing) {
+        authorId = author.getAuthorId();
+        publishingId = publishing.getPublishingId();
+        name = req.getParameter("title");
+        genre = req.getParameter("genre");
+        quantity = Integer.parseInt(req.getParameter("quantity"));
+    }
 }
