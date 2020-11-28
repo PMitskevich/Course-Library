@@ -159,4 +159,35 @@ public class BookDao implements DaoInterface<Book> {
             }
         }
     }
+
+    public List<Book> findBySubstring(String search) {
+        List<Book> books = new ArrayList<>();
+
+        try {
+            connection = PoolConnectionBuilder.getInstance().getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM `library_demo`.book "
+                                                            + "WHERE name LIKE '%" + search + "%'");
+
+            while(resultSet.next()) {
+                Book book = new Book();
+                setBook(resultSet, book);
+                books.add(book);
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Не удалось создать запрос к базе данных");
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("Не удалось закрыть соединение");
+                System.out.println(ex.getMessage());
+            }
+        }
+
+        return books;
+    }
 }

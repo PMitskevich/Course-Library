@@ -81,6 +81,7 @@
         <select id="selectGenre" name="genre">
             <option name="genre" value="Повесть">Повесть</option>
             <option name="genre" value="Роман">Роман</option>
+            <option name="genre" value="Поэма">Поэма</option>
             <option name="genre" value="Приключения">Приключения</option>
             <option name="genre" value="Комедия">Комедия</option>
             <option name="genre" value="Трагедия">Трагедия</option>

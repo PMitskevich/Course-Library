@@ -46,15 +46,15 @@ public class AddBookServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Book book = new Book();
-        Author author = new Author();
+        Author author = new AuthorFinderByName().getByName(req.getParameter("author"));
         Publishing publishing = new PublishingFinderByName().getByName(req.getParameter("publishing"));
 
-        if (author.isNewAuthor(req.getParameter("author"))) {
+        if (author == null) {
+            author = new Author();
             author.setAuthorId(authorDao.getAll().size() + 1);
             author.setAuthor(req.getParameter("author"));
             authorDao.save(author);
         }
-        else author = new AuthorFinderByName().getByName(req.getParameter("author"));
 
         if (publishing == null) {
             publishing = new Publishing();
