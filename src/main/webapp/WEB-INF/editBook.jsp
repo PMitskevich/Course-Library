@@ -149,7 +149,11 @@
                 else {
                     alert("Совпадений не найдено");
                 }
-            })
+            });
+
+            $("#cancel").click(function () {
+                createSearchForms(readyBooks);
+            });
         })
 
         function createSearchForms(searchResults) {
@@ -200,6 +204,7 @@
                 authorIdInput.setAttribute("type", "hidden");
                 authorIdInput.setAttribute("name", "authorId");
                 authorIdInput.setAttribute("value", element.authorId);
+                divAuthor.appendChild(authorIdInput);
 
                 let divGenre = document.createElement("div");
                 divGenre.setAttribute("class", "field");
@@ -237,6 +242,7 @@
                 publishingIdInput.setAttribute("type", "hidden");
                 publishingIdInput.setAttribute("name", "publishingId");
                 publishingIdInput.setAttribute("value", element.publishingId);
+                divPublishing.appendChild(publishingIdInput);
 
                 let divQuantity = document.createElement("div");
                 divQuantity.setAttribute("class", "field");
@@ -278,6 +284,7 @@
             Поиск: <input id="search" type="text" name="findbyname" value="" /><br />
         </div>
         <button id="finder">Найти</button>
+        <button id="cancel">Сброс</button>
     </div>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <jsp:useBean id="authors" scope="request" type="java.util.List"/>

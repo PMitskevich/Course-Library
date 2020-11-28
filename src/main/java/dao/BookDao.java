@@ -139,12 +139,12 @@ public class BookDao implements DaoInterface<Book> {
     }
 
     @Override
-    public void delete(Book book) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.book "
-                    + "WHERE `library_demo`.book.id_book=" + book.getBookId());
+                    + "WHERE `library_demo`.book.id_book=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

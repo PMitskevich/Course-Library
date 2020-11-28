@@ -118,12 +118,12 @@ public class PublishingDao implements DaoInterface<Publishing> {
     }
 
     @Override
-    public void delete(Publishing publishing) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.publishing "
-                    + "WHERE `library_demo`.publishing.id_publishing=" + publishing.getPublishingId());
+                    + "WHERE `library_demo`.publishing.id_publishing=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

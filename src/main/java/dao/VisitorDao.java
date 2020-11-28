@@ -146,12 +146,12 @@ public class VisitorDao implements DaoInterface<Visitor> {
     }
 
     @Override
-    public void delete(Visitor visitor) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.visitor "
-                    + "WHERE `library_demo`.visitor.id_visitor=" + visitor.getVisitorId());
+                    + "WHERE `library_demo`.visitor.id_visitor=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

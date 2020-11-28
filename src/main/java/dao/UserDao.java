@@ -133,12 +133,12 @@ public class UserDao implements DaoInterface<User> {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.user "
-                    + "WHERE `library_demo`.user.id_user=" + user.getUserId());
+                    + "WHERE `library_demo`.user.id_user=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

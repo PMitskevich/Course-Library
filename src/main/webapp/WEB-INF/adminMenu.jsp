@@ -15,11 +15,14 @@
     <form name="order" action="${pageContext.request.contextPath}/showorders" method="get">
         <input type="submit" value="Посмотреть заказы" />
     </form>
-    <form name="order" action="${pageContext.request.contextPath}/addbook" method="get">
+    <form name="add" action="${pageContext.request.contextPath}/addbook" method="get">
         <input type="submit" value="Заказать новую книгу" />
     </form>
-    <form name="order" action="${pageContext.request.contextPath}/editbook" method="get">
+    <form name="edit" action="${pageContext.request.contextPath}/editbook" method="get">
         <input type="submit" value="Редактировать запись о книге" />
+    </form>
+    <form name="delete" action="${pageContext.request.contextPath}/deletebook" method="get">
+        <input type="submit" value="Удалить запись о книге" />
     </form>
     <a href="${pageContext.request.contextPath}/index.jsp">Вернуться к авторизации</a>
 </body>

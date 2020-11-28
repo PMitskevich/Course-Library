@@ -60,7 +60,8 @@
 
 </head>
 <body>
-<form name="newbookorder" action="${pageContext.request.contextPath}/addbook" method="post">
+    <h1>Меню заказа новой книги</h1>
+    <form name="newbookorder" action="${pageContext.request.contextPath}/addbook" method="post">
     <div class="field">
         Название: <input type="text" name="title" value="" /><br />
     </div>

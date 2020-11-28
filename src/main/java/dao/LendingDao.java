@@ -245,12 +245,12 @@ public class LendingDao implements DaoInterface<Lending> {
     }
 
     @Override
-    public void delete(Lending lending) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.lending "
-                    + "WHERE `library_demo`.lending.id_lending=" + lending.getLendingId());
+                    + "WHERE `library_demo`.lending.id_lending=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

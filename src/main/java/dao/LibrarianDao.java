@@ -141,12 +141,12 @@ public class LibrarianDao implements DaoInterface<Librarian> {
     }
 
     @Override
-    public void delete(Librarian librarian) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.librarian "
-                    + "WHERE `library_demo`.librarian.id_librarian=" + librarian.getLibrarianId());
+                    + "WHERE `library_demo`.librarian.id_librarian=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");

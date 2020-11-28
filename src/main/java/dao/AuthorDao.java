@@ -138,12 +138,12 @@ public class AuthorDao implements DaoInterface<Author> {
     }
 
     @Override
-    public void delete(Author author) {
+    public void delete(long id) {
         try {
             connection = PoolConnectionBuilder.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM `library_demo`.author "
-                    + "WHERE `library_demo`.author.id_author=" + author.getAuthorId());
+                    + "WHERE `library_demo`.author.id_author=" + id);
         }
         catch (SQLException ex) {
             System.out.println("Не удалось создать запрос к базе данных");
