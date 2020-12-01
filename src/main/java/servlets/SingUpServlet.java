@@ -1,5 +1,6 @@
 package servlets;
 
+import com.google.gson.Gson;
 import dao.UserDao;
 import dao.VisitorDao;
 import model.User;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/signup")
 public class SingUpServlet extends HttpServlet {
@@ -27,6 +29,10 @@ public class SingUpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<User> users = userDao.getAll();
+        Gson gson = new Gson();
+        String jScriptArray = gson.toJson(users);
+        req.setAttribute("users", jScriptArray);
         req.getRequestDispatcher("/WEB-INF/signUp.jsp").forward(req, resp);
     }
 
