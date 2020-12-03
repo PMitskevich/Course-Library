@@ -53,6 +53,17 @@
             align-items: center;
             color: antiquewhite;
         }
+
+        .form-inline {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        button#finder {
+            margin-left: 5px;
+            font-weight: bold;
+            border-width: 2px;
+        }
     </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -71,6 +82,23 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/usermenu">В меню</a>
                 </li>
             </ul>
+            <form class="form-inline">
+                <select name="filter" id="filter" class="form-control">
+                    <option name="filter" value="Повесть">Повесть</option>
+                    <option name="filter" value="Роман">Роман</option>
+                    <option name="filter" value="Поэма">Поэма</option>
+                    <option name="filter" value="Приключения">Приключения</option>
+                    <option name="filter" value="Комедия">Комедия</option>
+                    <option name="filter" value="Трагедия">Трагедия</option>
+                    <option name="filter" value="Драма">Драма</option>
+                    <option name="filter" value="Ужасы">Ужасы</option>
+                    <option name="filter" value="Мифы">Мифы</option>
+                    <option name="filter" value="Рассказ">Рассказ</option>
+                    <option name="filter" value="Сказка">Сказка</option>
+                    <option name="filter" value="Баллада">Баллада</option>
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" id="finder" type="button">Поиск</button>
+            </form>
         </div>
     </nav>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>

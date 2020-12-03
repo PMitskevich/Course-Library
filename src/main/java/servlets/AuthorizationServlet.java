@@ -47,6 +47,8 @@ public class AuthorizationServlet extends HttpServlet {
             }
         }
 
+        String message = "Проверьте логин или пароль";
+        req.setAttribute("message", message);
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 

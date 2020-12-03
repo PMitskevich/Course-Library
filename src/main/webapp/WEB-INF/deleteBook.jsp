@@ -282,7 +282,7 @@
                             </div>
 
                             <div class="field">
-                                <input type="submit" value="Удалить" /><br />
+                                <input type="submit" class="btn btn-primary btn-sm" value="Удалить" /><br />
                             </div>
                         </form>
                     </div>

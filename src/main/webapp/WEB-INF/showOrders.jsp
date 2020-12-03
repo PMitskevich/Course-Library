@@ -44,7 +44,54 @@
             margin-bottom: 5px;
         }
 
+        span.help, h2 {
+            color: #660000;
+            font-style: italic;
+        }
     </style>
+    <script>
+        function validateNonEmpty(inputField, helpText) {
+            if (inputField.value.length === 0) {
+                if (helpText != null)
+                    helpText.innerHTML = "Заполните поле";
+                return false;
+            } else {
+                if (helpText != null)
+                    helpText.innerHTML = "";
+                return true;
+            }
+        }
+
+        function validateDate(inputField, helpText) {
+            let reqex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!validateNonEmpty(inputField, helpText)) {
+                return false;
+            }
+
+            return validateRegExp(reqex, inputField.value, helpText, "Введите корректную дату");
+        }
+
+        function validateRegExp(regex, inputStr, helpText, helpMessage) {
+            if (!regex.test(inputStr)) {
+                if (helpText != null)
+                    helpText.innerHTML = helpMessage;
+                return false;
+            } else {
+                if (helpText != null)
+                    helpText.innerHTML = "";
+                return true;
+            }
+        }
+
+        function checkForm(form) {
+            let returnDateField = document.getElementById("returndate");
+            let returnDateHelp = document.getElementById("returndate_help");
+            if (validateDate(returnDateField, returnDateHelp)) {
+                document.getElementById("returndate_help").innerHTML = "";
+                form.submit();
+            }
+        }
+    </script>
 </head>
 <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -126,14 +173,17 @@
                             </div>
                             <div class="field">
                                 <label for="returndate">Дата возврата</label>
-                                <input type="text" id="returndate" name="returndate" value="" />
+                                <input type="text" id="returndate" name="returndate" value=""
+                                       onblur="validateDate(this, document.getElementById('returndate_help'))" />
+                                <span class="help" id="returndate_help"></span>
                             </div>
                             <div class="field">
                                 <label for="lendquantity">Заказанное количество</label>
                                 <input type="text" id="lendquantity" name="lendquantity" value="${lending.lendQuantity}">
                             </div>
                             <div>
-                                <input type="submit" class="btn btn-primary btn-sm" value="Подтвердить" />
+                                <input type="button" class="btn btn-primary btn-sm" value="Подтвердить"
+                                       onclick="checkForm(this.form)" />
                             </div>
                         </form>
                     </div>

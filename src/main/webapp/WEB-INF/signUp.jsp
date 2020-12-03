@@ -58,7 +58,6 @@
         }
 
         function validatePhone(inputField, helpText) {
-            //    var regex = /^\d(\s)?\d{3}(\s)?\d{3}(\s)?\d{2}(\s)?\d{2}$/;
             let regex = /^(\+)(\s*)?([-_():=+]?\d[-_():=+]?){10,14}(\s*)?$/;
 
             if (!validateNonEmpty(inputField, helpText))

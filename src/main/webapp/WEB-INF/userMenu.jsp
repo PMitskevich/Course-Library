@@ -53,6 +53,9 @@
         <form name="order" action="${pageContext.request.contextPath}/choosebook" method="get">
             <input type="submit" class="btn btn-primary" value="Забронировать книгу" />
         </form>
+        <form name="order" action="${pageContext.request.contextPath}/cancelorder" method="get">
+            <input type="submit" class="btn btn-primary" value="Отменить бронь книги" />
+        </form>
         <form name="showconfirmed" action="${pageContext.request.contextPath}/showconfirmed" method="get">
             <input type="submit" class="btn btn-primary" value="Подтверждённые книги" />
         </form>

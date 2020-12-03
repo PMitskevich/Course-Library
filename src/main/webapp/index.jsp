@@ -24,6 +24,11 @@
         div.content {
             width: 30%;
         }
+
+        span.help, h2 {
+            color: #660000;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>

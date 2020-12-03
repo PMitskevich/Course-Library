@@ -30,7 +30,6 @@
                 inputElement.setAttribute("placeholder", "ФИО");
 
                 let divElement = document.createElement("div");
-                // divElement.className = "form-group";
                 divElement.className = "field"
                 let label = document.createElement("label");
                 label.setAttribute("for", "author");
