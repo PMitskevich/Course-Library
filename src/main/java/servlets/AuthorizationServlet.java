@@ -37,11 +37,13 @@ public class AuthorizationServlet extends HttpServlet {
                 if (!user.isAdmin()) {
                     long visitorId = new VisitorFinderById().getById(user.getUserId());
                     session.setAttribute("id_visitor", visitorId);
+                    session.setAttribute("id_librarian", (long) -1);
                     req.getRequestDispatcher("/WEB-INF/userMenu.jsp").forward(req, resp);
                 }
                 else {
                     long librarianId = new LibrarianFinderById().getById(user.getUserId());
                     session.setAttribute("id_librarian", librarianId);
+                    session.setAttribute("id_visitor", (long) -1);
                     req.getRequestDispatcher("/WEB-INF/adminMenu.jsp").forward(req, resp);
                 }
             }

@@ -62,6 +62,9 @@
         <form name="showunconfirmed" action="${pageContext.request.contextPath}/showunconfirmed" method="get">
             <input type="submit" class="btn btn-primary" value="Неподтверждённые книги" />
         </form>
+        <form name="showfeedback" action="${pageContext.request.contextPath}/showfeedback" method="get">
+            <input type="submit" class="btn btn-primary" value="Посмотреть отзывы" />
+        </form>
     </div>
     <footer class="footer mt-auto py-3">
         <div class="flex-footer">

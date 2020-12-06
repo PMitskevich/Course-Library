@@ -24,6 +24,8 @@ public class User {
 
     public boolean isAdmin() { return isAdmin; }
 
+    public boolean getIsAdmin() { return isAdmin; }
+
     public void setAdmin(boolean admin) { isAdmin = admin; }
 
     public void setUser(HttpServletRequest req) {

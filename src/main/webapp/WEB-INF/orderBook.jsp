@@ -64,7 +64,92 @@
             font-weight: bold;
             border-width: 2px;
         }
+
+        .empty-filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let books = [];
+
+        $(document).ready(() => {
+            $("#finder").click(function () {
+                let filterBox = document.querySelector(".form-inline #filter");
+                let filterValue = filterBox.options[filterBox.selectedIndex].value;
+                let resultBooks = [];
+                for (let i = 0; i < books.length; i++) {
+                    if (books[i].genre === filterValue) {
+                        resultBooks.push(books[i]);
+                    }
+                }
+                createResultForms(resultBooks);
+            })
+
+            $("#cancel").click(() => {
+                createResultForms(books);
+            })
+        })
+
+        class BookNote {
+            constructor(bookname, genre, id) {
+                this.name = bookname;
+                this.genre = genre;
+                this.bookId = id;
+            }
+        }
+
+        function addBookInArray(form) {
+            let elements = $(form).children();
+            let bookname = elements[0].innerText;
+            let genre = elements[1].innerText.substr(6, elements[1].innerText.length);
+            let bookId = elements[3].value;
+            books.push(new BookNote(bookname, genre, bookId));
+        }
+
+        function createResultForms(books) {
+            let booksElement = document.querySelector("div.books");
+            booksElement.innerHTML = "";
+            if (books.length == 0) {
+                let divElement = document.createElement("div");
+                divElement.className = "empty-filter";
+                let h1Element = document.createElement("h1");
+                h1Element.appendChild(document.createTextNode("Нет подходящих книг"));
+                divElement.appendChild(h1Element);
+                booksElement.appendChild(divElement);
+            }
+            else {
+                for (let i = 0; i < books.length; i++) {
+                    let formElement = document.createElement("form");
+                    formElement.className = "book";
+                    formElement.setAttribute("id", "form" + (i + 1));
+                    formElement.setAttribute("name", "choosebook");
+                    formElement.setAttribute("action", "${pageContext.request.contextPath}/orderbook");
+                    formElement.setAttribute("method", "get");
+                    let h3Element = document.createElement("h3");
+                    h3Element.innerText = books[i].name;
+                    let h6Element = document.createElement("h6");
+                    h6Element.innerText = "Жанр: " + books[i].genre;
+                    let submitElement = document.createElement("input");
+                    submitElement.setAttribute("type", "submit");
+                    submitElement.className = "btn btn-primary btn-sm";
+                    submitElement.setAttribute("id", "submit");
+                    submitElement.setAttribute("value", "Забронировать");
+                    let hiddenElement = document.createElement("input");
+                    hiddenElement.setAttribute("type", "hidden");
+                    hiddenElement.setAttribute("name", "id");
+                    hiddenElement.setAttribute("value", books[i].bookId);
+                    formElement.appendChild(h3Element);
+                    formElement.appendChild(h6Element);
+                    formElement.appendChild(submitElement);
+                    formElement.appendChild(hiddenElement);
+                    booksElement.appendChild(formElement);
+                }
+            }
+        }
+    </script>
 </head>
 <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -98,21 +183,27 @@
                     <option name="filter" value="Баллада">Баллада</option>
                 </select>
                 <button class="btn btn-outline-success my-2 my-sm-0" id="finder" type="button">Поиск</button>
+                <button class="btn btn-outline-danger my-2 my-sm-0" id="cancel" type="button">Сброс</button>
             </form>
         </div>
     </nav>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <jsp:useBean id="authors" scope="request" type="java.util.List"/>
     <div class="books">
+        <c:set var="counter" value="1" />
         <c:forEach var="book" items="${books}">
-            <form name="choosebook" action="${pageContext.request.contextPath}/orderbook" method="get">
-                <div class="book">
+            <c:if test="${book.quantity > 0}">
+                <form class="book" id="form${counter}" name="choosebook" action="${pageContext.request.contextPath}/orderbook" method="get">
                     <h3>${book.name}</h3>
                     <h6>Жанр: ${book.genre}</h6>
                     <input type="submit" class="btn btn-primary btn-sm" id="submit" value="Забронировать" />
                     <input type="hidden" name="id" value="${book.bookId}" />
-                </div>
-            </form>
+                </form>
+                <script>
+                    addBookInArray(document.getElementById("form${counter}"));
+                </script>
+            </c:if>
+            <c:set var="counter" value="${counter + 1}" />
         </c:forEach>
     </div>
     <footer class="footer mt-auto py-3">
