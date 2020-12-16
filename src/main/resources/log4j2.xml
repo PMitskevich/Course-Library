@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="INFO">
+    <Properties>
+        <property name="pattern_0">
+            %d{MM:dd HH:mm:ss} %level %logger{} - %msg%n
+        </property>
+    </Properties>
+    <Appenders>
+        <File name="infofile" fileName="logs/error.log">
+            <PatternLayout pattern="${pattern_0}" />
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="infofile" />
+        </Root>
+    </Loggers>
+</Configuration>

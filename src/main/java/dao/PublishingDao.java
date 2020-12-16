@@ -2,6 +2,9 @@ package dao;
 
 import connection.PoolConnectionBuilder;
 import model.Publishing;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublishingDao implements DaoInterface<Publishing> {
+    private static final Logger LOGGER = LogManager.getLogger(PublishingDao.class);
     private Connection connection;
 
     public PublishingDao() { }
@@ -33,15 +37,14 @@ public class PublishingDao implements DaoInterface<Publishing> {
             if (resultSet.next()) setPublishing(resultSet, publishing);
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
         return publishing;
@@ -63,15 +66,14 @@ public class PublishingDao implements DaoInterface<Publishing> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -88,15 +90,14 @@ public class PublishingDao implements DaoInterface<Publishing> {
                     + publishing.getPublishingName() + "');");
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
     }
@@ -112,8 +113,15 @@ public class PublishingDao implements DaoInterface<Publishing> {
                     + "WHERE `library_demo`.publishing.id_publishing=" + publishing.getPublishingId());
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
+            }
         }
     }
 
@@ -126,15 +134,14 @@ public class PublishingDao implements DaoInterface<Publishing> {
                     + "WHERE `library_demo`.publishing.id_publishing=" + id);
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
     }

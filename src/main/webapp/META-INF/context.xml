@@ -12,4 +12,10 @@
         url="jdbc:mysql://localhost:3306/library_demo?useUnicode=true&amp;serverTimezone=UTC"
         validationQuery="SELECT 1">
     </Resource>
+    <module>
+        <web>
+            <web-uri>library-1.0-SNAPSHOT.war</web-uri>
+            <context-root>library</context-root>
+        </web>
+    </module>
 </Context>

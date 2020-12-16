@@ -10,6 +10,16 @@ public class User {
     private String password;
     private boolean isAdmin;
 
+    public User() {
+    }
+
+    public User(long userId, String login, String password, boolean isAdmin) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
     public long getUserId() { return userId; }
 
     public void setUserId(long userId) { this.userId = userId; }

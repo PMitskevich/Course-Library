@@ -160,7 +160,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">Телефон: </label>
-                <input type="text" class="form-control" id="phone" placeholder="Отчество" name="phone" value=""
+                <input type="text" class="form-control" id="phone" placeholder="Телефон" name="phone" value=""
                        onblur="validatePhone(this, document.getElementById('phone_help'))" />
                 <span class="help" id="phone_help"></span>
             </div>

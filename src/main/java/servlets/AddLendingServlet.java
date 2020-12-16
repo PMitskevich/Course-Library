@@ -45,7 +45,7 @@ public class AddLendingServlet extends HttpServlet {
         List<Lending> lendings = lendingDao.getAll();
         Lending lending = new Lending();
 
-        lending.setLendingId(lendings.size() + 1);
+        lending.setLendingId(lendingDao.getMaxId() + 1);
         lending.setLendQuantity(quantity);
         lending.setLendDate(LocalDate.now());
         lending.setVisitorId(roleId);

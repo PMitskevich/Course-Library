@@ -9,6 +9,13 @@ public class Author {
 
     public Author() { }
 
+    public Author(long authorId, String name, String surname, String patronymic) {
+        this.authorId = authorId;
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+    }
+
     public long getAuthorId() { return authorId; }
 
     public void setAuthorId(long authorId) { this.authorId = authorId; }

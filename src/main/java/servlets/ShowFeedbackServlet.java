@@ -6,8 +6,6 @@ import dao.UserDao;
 import dao.VisitorDao;
 import model.Feedback;
 import model.User;
-import services.finderbyid.LibrarianFinderById;
-import services.finderbyid.VisitorFinderById;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

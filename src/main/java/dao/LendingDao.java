@@ -3,7 +3,9 @@ package dao;
 import connection.PoolConnectionBuilder;
 import model.Book;
 import model.Lending;
-import services.finderbyid.BookFinderById;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 public class LendingDao implements DaoInterface<Lending> {
+    private static final Logger LOGGER = LogManager.getLogger(LendingDao.class);
     private Connection connection;
 
     public LendingDao() {}
@@ -45,15 +48,13 @@ public class LendingDao implements DaoInterface<Lending> {
             if (resultSet.next()) setLending(resultSet, lending);
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось получить данные: " + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -76,16 +77,13 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Метод getAll()");
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось получить данные: " + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -111,15 +109,14 @@ public class LendingDao implements DaoInterface<Lending> {
             bookDao.update(book);
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                        + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
     }
@@ -139,23 +136,16 @@ public class LendingDao implements DaoInterface<Lending> {
                     + "`library_demo`.lending.lend_quantity='" + lending.getLendQuantity() + "'"
                     + "WHERE `library_demo`.lending.id_lending=" + lending.getLendingId());
 
-//            if (!lending.getReturnDate().toString().equals("0000-01-01")) {
-//                BookDao bookDao = new BookDao();
-//                Book book = bookDao.get(lending.getBookId());
-//                book.setQuantity(book.getQuantity() - lending.getLendQuantity());
-//                bookDao.update(book);
-//            }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
     }
@@ -169,17 +159,27 @@ public class LendingDao implements DaoInterface<Lending> {
                     + "WHERE `library_demo`.lending.id_lending=" + id);
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось создать запрос к базе данных");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
+    }
+
+    public long getMaxId() {
+        long maxId = 0;
+        List<Lending> lendings = getAll();
+        for (Lending lending : lendings) {
+            if (lending.getLendingId() > maxId) {
+                maxId = lending.getLendingId();
+            }
+        }
+        return maxId;
     }
 
     public List<Lending> getConfirmed(long visitorId) {
@@ -198,15 +198,14 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -229,15 +228,14 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -260,15 +258,14 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -291,15 +288,14 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
 
@@ -309,8 +305,9 @@ public class LendingDao implements DaoInterface<Lending> {
     public List<Lending> findByPeriod(String timePeriod) {
         List<Lending> lendings = new ArrayList<>();
         LocalDate today = LocalDate.now();
+        String formattedString = timePeriod.trim();
 
-        switch (timePeriod) {
+        switch (formattedString) {
             case "За всё время":
                 lendings = getAll();
                 break;
@@ -337,11 +334,13 @@ public class LendingDao implements DaoInterface<Lending> {
         LocalDate resultDate = today.minusMonths(1);
         String todayAsString = df.format(convertToDateViaInstant(today));
         String resultDateAsString = df.format(convertToDateViaInstant(resultDate));
+//        System.out.println("result date: " + resultDateAsString);
+//        System.out.println("today: " + todayAsString);
         return findLendingsByDistance(resultDateAsString, todayAsString);
     }
 
     private Date convertToDateViaInstant(LocalDate dateToConvert) {
-        return java.util.Date.from(dateToConvert.atStartOfDay()
+        return Date.from(dateToConvert.atStartOfDay()
                 .atZone(ZoneId.systemDefault())
                 .toInstant());
     }
@@ -361,15 +360,14 @@ public class LendingDao implements DaoInterface<Lending> {
             }
         }
         catch (SQLException ex) {
-            System.out.println("Не удалось получить данные");
-            System.out.println(ex.getMessage());
+            LOGGER.log(Level.ERROR, "Не удалось создать запрос к базе данных: "
+                    + ex.getMessage());
         }
         finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("Не удалось закрыть соединение");
-                System.out.println(ex.getMessage());
+                LOGGER.log(Level.ERROR, "Не удалось закрыть соединение: " + ex.getMessage());
             }
         }
         return lendings;

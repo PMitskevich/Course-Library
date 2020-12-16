@@ -1,7 +1,11 @@
 package servlets;
 
+import connection.PoolConnectionBuilder;
 import dao.UserDao;
 import model.User;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import services.finderbyid.LibrarianFinderById;
 import services.finderbyid.VisitorFinderById;
 
